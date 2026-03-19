@@ -44,7 +44,7 @@ export default function AdminUpload() {
       const errs: string[] = [];
       if (!obj['name']?.trim()) errs.push('Name is required');
       if (!obj['email']?.trim()) errs.push('Email is required');
-      else if (!/\S+@\S+\.\S+/.test(obj['email'])) errs.push('Invalid email');
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(obj['email'])) errs.push('Invalid email');
       if (!obj['batch']?.trim()) errs.push('Batch is required');
       if (!obj['enrollmentnumber']?.trim()) errs.push('Enrollment number is required');
       return {
@@ -66,7 +66,7 @@ export default function AdminUpload() {
     valid.forEach(r => {
       if (getUserByEmail(r.email)) return;
       addUser({
-        id: `u${Date.now()}_${count}`,
+        id: `u${Math.random().toString(36).slice(2, 10)}_${count}`,
         email: r.email,
         password: 'password123',
         name: r.name,
