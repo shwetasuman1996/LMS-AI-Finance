@@ -1,24 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import StudentLayout from '@/components/Layout/StudentLayout';
 import { getQuizAttempts, getQuizById, type QuizAttempt, type Quiz } from '@/lib/mock-data';
 
-export default function TestResultsPage({ params }: { params: { id: string } }) {
+export default function TestResultsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
   const [quiz, setQuiz] = useState<Quiz | null>(null);
 
   useEffect(() => {
     const attempts = getQuizAttempts();
-    const found = attempts.find(a => a.id === params.id);
+    const found = attempts.find(a => a.id === id);
     if (!found) { router.replace('/student/tests'); return; }
     setAttempt(found);
     const q = getQuizById(found.quizId);
     if (q) setQuiz(q);
-  }, [params.id, router]);
+  }, [id, router]);
 
   if (!attempt || !quiz) {
     return (

@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { use, useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import StudentLayout from '@/components/Layout/StudentLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { getQuizById, addQuizAttempt, getAttemptsByStudent, type Quiz } from '@/lib/mock-data';
 
-export default function TakeTestPage({ params }: { params: { id: string } }) {
+export default function TakeTestPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const { currentUser } = useAuth();
   const router = useRouter();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
@@ -39,23 +40,23 @@ export default function TakeTestPage({ params }: { params: { id: string } }) {
   }, [quiz, currentUser, submitted, router]);
 
   useEffect(() => {
-    const q = getQuizById(params.id);
+    const q = getQuizById(id);
     if (!q) { router.replace('/student/tests'); return; }
     if (currentUser) {
-      const existing = getAttemptsByStudent(currentUser.id).find(a => a.quizId === params.id);
+      const existing = getAttemptsByStudent(currentUser.id).find(a => a.quizId === id);
       if (existing) { setAlreadyAttempted(true); return; }
     }
     setQuiz(q);
     setAnswers(new Array(q.questions.length).fill(-1));
     // Use sessionStorage to persist start time across remounts
-    const storageKey = `test_start_${params.id}`;
+    const storageKey = `test_start_${id}`;
     const stored = sessionStorage.getItem(storageKey);
     const startTime = stored ? parseInt(stored, 10) : Date.now();
     if (!stored) sessionStorage.setItem(storageKey, String(startTime));
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
     const remaining = Math.max(0, q.duration * 60 - elapsed);
     setTimeLeft(remaining);
-  }, [params.id, currentUser, router]);
+  }, [id, currentUser, router]);
 
   useEffect(() => {
     if (!quiz || alreadyAttempted || submitted) return;
