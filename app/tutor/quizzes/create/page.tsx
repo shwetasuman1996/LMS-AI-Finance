@@ -81,7 +81,7 @@ export default function CreateQuizPage() {
       subject: subject.trim(),
       createdAt: new Date().toISOString(),
       questions: questions.map((q, qi) => ({
-        id: `qq${Date.now()}_${qi}`,
+        id: `qq${Date.now()}_${qi}_${Math.random().toString(36).slice(2, 8)}`,
         text: q.text.trim(),
         options: q.options.map(o => o.trim()),
         correctAnswer: q.correctAnswer,

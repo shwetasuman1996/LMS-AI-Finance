@@ -19,6 +19,7 @@ export default function TakeTestPage({ params }: { params: { id: string } }) {
   const submitQuiz = useCallback((finalAnswers: number[]) => {
     if (!quiz || !currentUser || submitted) return;
     setSubmitted(true);
+    sessionStorage.removeItem(`test_start_${quiz.id}`);
     let score = 0;
     quiz.questions.forEach((q, i) => {
       if (finalAnswers[i] === q.correctAnswer) score += q.marks;
@@ -46,7 +47,14 @@ export default function TakeTestPage({ params }: { params: { id: string } }) {
     }
     setQuiz(q);
     setAnswers(new Array(q.questions.length).fill(-1));
-    setTimeLeft(q.duration * 60);
+    // Use sessionStorage to persist start time across remounts
+    const storageKey = `test_start_${params.id}`;
+    const stored = sessionStorage.getItem(storageKey);
+    const startTime = stored ? parseInt(stored, 10) : Date.now();
+    if (!stored) sessionStorage.setItem(storageKey, String(startTime));
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const remaining = Math.max(0, q.duration * 60 - elapsed);
+    setTimeLeft(remaining);
   }, [params.id, currentUser, router]);
 
   useEffect(() => {

@@ -46,12 +46,12 @@ export default function AdminUpload() {
       if (!obj['email']?.trim()) errs.push('Email is required');
       else if (!/\S+@\S+\.\S+/.test(obj['email'])) errs.push('Invalid email');
       if (!obj['batch']?.trim()) errs.push('Batch is required');
-      if (!obj['enrollmentnumber']?.trim() && !obj['enrollmentNumber']?.trim()) errs.push('Enrollment number is required');
+      if (!obj['enrollmentnumber']?.trim()) errs.push('Enrollment number is required');
       return {
         name: obj['name'] ?? '',
         email: obj['email'] ?? '',
         batch: obj['batch'] ?? '',
-        enrollmentNumber: obj['enrollmentnumber'] ?? obj['enrollmentNumber'] ?? '',
+        enrollmentNumber: obj['enrollmentnumber'] ?? '',
         phone: obj['phone'] ?? '',
         valid: errs.length === 0,
         errors: errs,

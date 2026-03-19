@@ -1,3 +1,5 @@
+const MS_PER_DAY = 86_400_000;
+
 export interface User {
   id: string;
   email: string;
@@ -171,25 +173,25 @@ let notices: Notice[] = [
     id: 'n1', title: 'CA Foundation Exam Schedule Released',
     content: 'The ICAI has released the CA Foundation exam schedule for November 2024. Students are requested to check the official website and start preparation accordingly. Mock tests will be conducted starting next week.',
     tutorId: 'u4', tutorName: 'Prof. Anjali Singh',
-    createdAt: new Date(Date.now() - 86400000).toISOString(), important: true,
+    createdAt: new Date(Date.now() - MS_PER_DAY).toISOString(), important: true,
   },
   {
     id: 'n2', title: 'Financial Accounting Class Rescheduled',
     content: 'The Financial Accounting class on Monday has been rescheduled to 10:00 AM - 11:30 AM due to a faculty meeting. Please make a note of this change.',
     tutorId: 'u4', tutorName: 'Prof. Anjali Singh',
-    createdAt: new Date(Date.now() - 2 * 86400000).toISOString(), important: false,
+    createdAt: new Date(Date.now() - 2 * MS_PER_DAY).toISOString(), important: false,
   },
   {
     id: 'n3', title: 'Important: Tax Assignment Due Date',
     content: 'The Taxation assignment on GST filing is due by this Friday. Students who have not yet submitted their practice returns should do so immediately. No extensions will be granted.',
     tutorId: 'u5', tutorName: 'Prof. Vikram Mehta',
-    createdAt: new Date(Date.now() - 3 * 86400000).toISOString(), important: true,
+    createdAt: new Date(Date.now() - 3 * MS_PER_DAY).toISOString(), important: true,
   },
   {
     id: 'n4', title: 'Study Material for Cost Accounting',
     content: 'New study material for the upcoming Cost Accounting chapter on Standard Costing has been uploaded to the Resources section. Please download and review before the next class.',
     tutorId: 'u5', tutorName: 'Prof. Vikram Mehta',
-    createdAt: new Date(Date.now() - 5 * 86400000).toISOString(), important: false,
+    createdAt: new Date(Date.now() - 5 * MS_PER_DAY).toISOString(), important: false,
   },
 ];
 
@@ -199,42 +201,42 @@ let resources: Resource[] = [
     type: 'pdf', url: 'https://example.com/fa-chapter5.pdf',
     description: 'Comprehensive notes for Financial Accounting Chapter 5 covering depreciation methods and inventory valuation.',
     tutorId: 'u4', tutorName: 'Prof. Anjali Singh', subject: 'Financial Accounting',
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    createdAt: new Date(Date.now() - MS_PER_DAY).toISOString(),
   },
   {
     id: 'r2', title: 'ICAI Study Portal',
     type: 'link', url: 'https://icai.org',
     description: 'Official ICAI study portal with past papers, study material, and practice questions for all CA levels.',
     tutorId: 'u4', tutorName: 'Prof. Anjali Singh', subject: 'General',
-    createdAt: new Date(Date.now() - 2 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 2 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'r3', title: 'GST Filing Tutorial',
     type: 'video', url: 'https://www.youtube.com/watch?v=example',
     description: 'Step-by-step video tutorial on how to file GST returns on the official portal. Covers GSTR-1 and GSTR-3B.',
     tutorId: 'u5', tutorName: 'Prof. Vikram Mehta', subject: 'Taxation',
-    createdAt: new Date(Date.now() - 3 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 3 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'r4', title: 'Audit Standards Quick Reference',
     type: 'pdf', url: 'https://example.com/audit-standards.pdf',
     description: 'Quick reference guide for all SA (Standards on Auditing) issued by ICAI, with key points and examples.',
     tutorId: 'u5', tutorName: 'Prof. Vikram Mehta', subject: 'Audit',
-    createdAt: new Date(Date.now() - 4 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 4 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'r5', title: 'Corporate Law Case Studies',
     type: 'pdf', url: 'https://example.com/corp-law-cases.pdf',
     description: 'Collection of important case studies on Corporate Law relevant to the CA Foundation examination.',
     tutorId: 'u4', tutorName: 'Prof. Anjali Singh', subject: 'Corporate Law',
-    createdAt: new Date(Date.now() - 6 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 6 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'r6', title: 'Financial Management Formulas',
     type: 'pdf', url: 'https://example.com/fm-formulas.pdf',
     description: 'Comprehensive formula sheet for Financial Management including capital budgeting, ratio analysis, and working capital management.',
     tutorId: 'u5', tutorName: 'Prof. Vikram Mehta', subject: 'Financial Management',
-    createdAt: new Date(Date.now() - 7 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 7 * MS_PER_DAY).toISOString(),
   },
 ];
 
@@ -259,7 +261,7 @@ let quizzes: Quiz[] = [
   {
     id: 'q1', title: 'Financial Accounting Quiz 1', type: 'quiz',
     tutorId: 'u4', duration: 30, subject: 'Financial Accounting',
-    createdAt: new Date(Date.now() - 3 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 3 * MS_PER_DAY).toISOString(),
     questions: [
       { id: 'qq1', text: 'Which accounting concept requires that revenue should be recognized when it is earned?', options: ['Matching Concept', 'Accrual Concept', 'Going Concern', 'Consistency'], correctAnswer: 1, marks: 2 },
       { id: 'qq2', text: 'What is the accounting equation?', options: ['Assets = Liabilities + Equity', 'Assets = Liabilities - Equity', 'Equity = Assets + Liabilities', 'Liabilities = Assets + Equity'], correctAnswer: 0, marks: 2 },
@@ -271,7 +273,7 @@ let quizzes: Quiz[] = [
   {
     id: 'q2', title: 'Taxation Mid-Term Exam', type: 'exam',
     tutorId: 'u5', duration: 60, subject: 'Taxation',
-    createdAt: new Date(Date.now() - 5 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 5 * MS_PER_DAY).toISOString(),
     questions: [
       { id: 'qq6', text: 'What is the full form of GST?', options: ['General Sales Tax', 'Goods and Services Tax', 'Government Service Tax', 'Global Supply Tax'], correctAnswer: 1, marks: 5 },
       { id: 'qq7', text: 'Under GST, CGST stands for?', options: ['Central Goods and Services Tax', 'Collective GST', 'Comprehensive GST', 'Combined GST'], correctAnswer: 0, marks: 5 },
@@ -282,7 +284,7 @@ let quizzes: Quiz[] = [
   {
     id: 'q3', title: 'Audit Standards Quiz', type: 'quiz',
     tutorId: 'u4', duration: 20, subject: 'Audit',
-    createdAt: new Date(Date.now() - 7 * 86400000).toISOString(),
+    createdAt: new Date(Date.now() - 7 * MS_PER_DAY).toISOString(),
     questions: [
       { id: 'qq10', text: 'SA 200 deals with?', options: ['Overall Objectives of Auditor', 'Audit Evidence', 'Audit Documentation', 'Risk Assessment'], correctAnswer: 0, marks: 3 },
       { id: 'qq11', text: 'Audit risk is composed of?', options: ['Inherent Risk only', 'Control Risk only', 'Inherent, Control, and Detection Risk', 'Business Risk only'], correctAnswer: 2, marks: 3 },
@@ -295,17 +297,17 @@ const quizAttempts: QuizAttempt[] = [
   {
     id: 'qa1', studentId: 'u2', quizId: 'q1',
     answers: [1, 0, 1, 2, 1], score: 8, totalMarks: 10,
-    submittedAt: new Date(Date.now() - 2 * 86400000).toISOString(),
+    submittedAt: new Date(Date.now() - 2 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'qa2', studentId: 'u3', quizId: 'q1',
     answers: [1, 0, 1, 0, 1], score: 6, totalMarks: 10,
-    submittedAt: new Date(Date.now() - 1 * 86400000).toISOString(),
+    submittedAt: new Date(Date.now() - 1 * MS_PER_DAY).toISOString(),
   },
   {
     id: 'qa3', studentId: 'u2', quizId: 'q2',
     answers: [1, 0, 2, 1], score: 10, totalMarks: 20,
-    submittedAt: new Date(Date.now() - 4 * 86400000).toISOString(),
+    submittedAt: new Date(Date.now() - 4 * MS_PER_DAY).toISOString(),
   },
 ];
 
